@@ -70,7 +70,7 @@
   </tr>
    <tr class="form-field">
     <th scope="row">
-      <label for="site_address">Address</label>
+      <label for="admin_address">Address</label>
     </th>
     <td>
       <input type="text" placeholder="Address" name="admin_address" id="admin_address" value="<?php echo setting('admin_address'); ?>">
@@ -101,7 +101,7 @@
     </th>
     <td>
     <label for="users_can_register">
-<input name="users_can_register" type="checkbox" id="users_can_register" value="1"  <?php echo (setting('users_can_register')==1?'checked="checked"':''); ?>>
+<input name="users_can_register" type="checkbox" id="users_can_register" value="1"  <?php echo (setting('users_can_register')=='1'?'checked="checked"':''); ?>>
 	Anyone can register</label>
     </td>
 

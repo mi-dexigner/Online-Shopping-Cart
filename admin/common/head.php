@@ -1,4 +1,4 @@
-<?php require_once '/Applications/MAMP/htdocs/ecommerce/settings.php';
+<?php require_once '../settings.php';
 
 
   if(!isset($_COOKIE['miadmin_login'])) {

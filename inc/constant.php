@@ -1,12 +1,12 @@
 <?php
 // Frontend
-define('BASE_URL', 'http://localhost/ecommerce/');
+define('BASE_URL', 'http://localhost/store/');
 // admin
 define('ADMIN_URL', BASE_URL.'admin/');
 // define('ADMIN_URL','http://localhost/ecommerce/admin/');
 
 
-define('DIR_STORAGE', '/Applications/MAMP/htdocs/ecommerce/storage/');
+define('DIR_STORAGE', BASE_URL.'storage/');
 
 define('DIR_UPLOAD', DIR_STORAGE . 'upload/');
 define("MAX_IMAGE_SIZE", 20480); //In KB

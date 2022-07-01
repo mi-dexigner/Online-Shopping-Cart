@@ -1,5 +1,5 @@
 <?php 
-require_once '/Applications/MAMP/htdocs/ecommerce/settings.php';
+require_once '../settings.php';
 $page_name = htmlspecialchars(basename($_SERVER["PHP_SELF"], '.php'), ENT_QUOTES, "utf-8");
 
 mi_logout();

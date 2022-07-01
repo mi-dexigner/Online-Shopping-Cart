@@ -1,13 +1,74 @@
 <?php require_once "common/head.php"; ?>
    <?php require_once "common/sidebar.php"; ?>
-   <?php require_once "common/header.php"; ?>
+   <?php require_once "common/header.php";
+   if(isset($_POST['action'])){
+       if($_POST['action']==="createuser"){
+           
+           $user_login = $_POST['user_login'];
+           $user_email = $_POST['user_email'];
+           $user_pass = md5($_POST['user_pass']);
+           $meta = $_POST['meta'];
+           $first_name = $_POST['meta']['first_name'];
+           $last_name = $_POST['meta']['last_name'];
+           $website = $_POST['meta']['website'];
+           $role = $_POST['meta']['role'];
+          
+           if(empty($_POST['user_login']) || empty($_POST['user_pass'])){
+            $error = '
+            <div id="login_error"> <strong>Error</strong>: The username field is empty.<br>
+            <strong>Error</strong>: The password field is empty.<br>
+            </div>';
+            }
+            if(empty($_POST['user_login'])){
+              $error = '
+              <div id="login_error"> <strong>Error</strong>: The username field is empty.<br>
+              </div>';
+              }
+                if(empty($_POST['user_pass'])){
+                  $error = '
+                  <div id="login_error"><strong>Error</strong>: The password field is empty.<br>
+                  </div>';
+                  } 
+                  $metaSql = 'INSERT INTO usermeta(user_id,meta_key,meta_value) VALUES(:user_id,:meta_key,:meta_value)';
+                  $st = $db->prepare($metaSql);
+                 
+                  $sql = 'INSERT INTO users(user_login,user_pass,user_nicename,user_email,user_image,display_name) VALUES(:user_login,:user_pass,user_nicename,:user_email,:user_image,:display_name)';
+                  $statement = $db->prepare($sql);
+                  print_r($statement->execute()); 
+                  die();
+                  if($statement->execute(
+                    [':user_login'=>$user_login,
+                    ':user_pass'=>$user_pass,
+                    ':user_nicename'=>'',
+                    ':user_email'=>$user_email,
+                    ':user_image'=>'',
+                    ':display_name'=>$user_login]
+                    )){
+                     
+                      $message = 'data inserted successfully';
+                      $id = $db->lastInsertId();
+                     /*  foreach($meta as $k => $v){
+                          $st->bindParam(':user_id', $id);
+                          $st->bindParam(':meta_key', $k);
+                          $st->bindParam(':meta_value', $v);
+                          $st->execute();
+                      } */
+                  } 
+           
+       }
+   }
+   
+   ?>
         <div class="card">
 <div class="card-header page-header column">
     <h3>Add New User</h3>
     <small>Create a brand new user and add them to this site.</small>
+    <?php if(isset($error)){
+      echo $error;
+  } ?>
 </div>
 <div class="card-body">
-<form method="post" method="user-new.html" id="createuser" class="createform">
+<form method="POST" id="createuser" class="createform">
 <input type="hidden" name="action" value="createuser">
 <table class="form-table" role="presentation">
 <tbody>
@@ -80,7 +141,7 @@
 
 </tbody>
 </table>
-<p class="submit"><input type="submit" name="createuser" id="createusersub" class="btn" value="Add New User"></p>
+<p class="submit"><input type="submit" name="submituser" id="createusersub" class="btn" value="Add New User"></p>
 </form>
 </div>
 </div>
