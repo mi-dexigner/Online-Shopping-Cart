@@ -6,9 +6,7 @@ define('ADMIN_URL', BASE_URL.'admin/');
 // define('ADMIN_URL','http://localhost/ecommerce/admin/');
 
 
-define('DIR_STORAGE', BASE_URL.'storage/');
-
-define('DIR_UPLOAD', DIR_STORAGE . 'upload/');
+define('DIR_UPLOAD', 'upload/');
 define("MAX_IMAGE_SIZE", 20480); //In KB
 // image type allowed
 $IMAGE_ALLOWED_TYPES=array("jpg","JPG", "jpeg","JPEG", "gif", "png","PNG","psd","ai","xls","xlsx","csv","doc","docx","ppt","pptx","pdf","zip","rar","txt","html","css","js");

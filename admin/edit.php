@@ -4,7 +4,7 @@
         <div class="card">
 <div class="card-header page-header">
 <h3>All <?php page_title(); ?></h3>
-<a href="user-new" class="btn-outline">Add New</a>
+<a href="<?php echo ADMIN_URL; ?>post-new/<?php echo (isset($_GET['post_type'])?'?post_type='.strtolower($_GET['post_type']):'') ?>" class="btn-outline">Add New</a>
 </div>
   <div class="card-body">
  

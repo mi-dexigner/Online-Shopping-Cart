@@ -29,13 +29,12 @@
                   <div id="login_error"><strong>Error</strong>: The password field is empty.<br>
                   </div>';
                   } 
-                  $metaSql = 'INSERT INTO usermeta(user_id,meta_key,meta_value) VALUES(:user_id,:meta_key,:meta_value)';
+                 $metaSql = 'INSERT INTO usermeta(user_id,meta_key,meta_value) VALUES(:user_id,:meta_key,:meta_value)';
                   $st = $db->prepare($metaSql);
-                 
-                  $sql = 'INSERT INTO users(user_login,user_pass,user_nicename,user_email,user_image,display_name) VALUES(:user_login,:user_pass,user_nicename,:user_email,:user_image,:display_name)';
+                 // INSERT INTO `users`( `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_image`, `user_registered`, `user_status`, `display_name`) VALUES ('[value-2]','[value-3]','[value-4]','[value-5]','[value-6]','[value-7]','[value-8]','[value-9]')
+                  $sql = 'INSERT INTO users(user_login,user_pass,user_nicename,user_email,user_image,display_name) VALUES(:user_login,:user_pass,:user_nicename,:user_email,:user_image,:display_name)';
                   $statement = $db->prepare($sql);
-                  print_r($statement->execute()); 
-                  die();
+                  //$statement->debugDumpParams();
                   if($statement->execute(
                     [':user_login'=>$user_login,
                     ':user_pass'=>$user_pass,
@@ -47,12 +46,12 @@
                      
                       $message = 'data inserted successfully';
                       $id = $db->lastInsertId();
-                     /*  foreach($meta as $k => $v){
+                      foreach($meta as $k => $v){
                           $st->bindParam(':user_id', $id);
                           $st->bindParam(':meta_key', $k);
                           $st->bindParam(':meta_value', $v);
                           $st->execute();
-                      } */
+                      } 
                   } 
            
        }
@@ -63,6 +62,11 @@
 <div class="card-header page-header column">
     <h3>Add New User</h3>
     <small>Create a brand new user and add them to this site.</small>
+    <?php if(!empty($message)): ?>
+            <div class="-success">
+                <p><?php echo $message; ?></p>
+            </div>
+          <?php endif; ?>
     <?php if(isset($error)){
       echo $error;
   } ?>
@@ -127,7 +131,7 @@
       <label for="role">Role</label>
     </th>
     <td>
-  <select id="role"  name="meta[role]" id="role">
+  <select id="role"  name="meta[capabilities]" id="role">
     <option value="shop_manager">Shop manager</option>
     <option value="customer">Customer</option>
     <option selected="selected" value="subscriber">Subscriber</option>
@@ -136,6 +140,8 @@
     <option value="editor">Editor</option>
     <option value="administrator">Administrator</option>
 </select>
+<input type="hidden" name="meta[description]" value="">
+<input type="hidden" name="meta[rich_editing}" value="true">
     </td>
  </tr>
 

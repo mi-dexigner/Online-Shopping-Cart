@@ -28,28 +28,36 @@
       </tr>
     </tfoot>
     <tbody>
-
+<?php
+$sql = 'SELECT * FROM users';
+$statement = $db->prepare($sql);
+$statement->execute();
+$users = $statement->fetchAll(PDO::FETCH_OBJ);
+foreach($users as $user): 
+  $name = get_user_meta($user->ID,"first_name").' '.get_user_meta($user->ID,"last_name");
+  $role = get_user_meta($user->ID,"capabilities");
+?>
       <tr>
         <td><input type="checkbox" name="users[]" id="user_1" class="administrator" value="1"></td>
         <td class="username">
          <div> <img src="https://randomuser.me/api/portraits/women/50.jpg" width="32" height="32" alt="1">
          <div>
-         <strong>admin</strong>
+         <strong><?php echo $user->user_login; ?></strong>
          <div class="row-actions">
             <span class="edit"><a href="">Edit</a> | </span>
            <span class="view"> <a href="">View</a> | </span>
-            <span class="delete"><a href="">Delete</a></span>
+            <span class="delete"><a href="" onclick="return confirm('Are you sure you want to delete this entry?')">Delete</a></span>
           </div>
          </div>
         </div>
          
         </td>
-        <td>James</td>
-        <td>admin@yopmail.com</td>
-        <td>Administrator</td>
+        <td><?php echo $name; ?></td>
+        <td><?php echo $user->user_email; ?></td>
+        <td><?php echo $role; ?></td>
       </tr>
    
-    
+      <?php endforeach;  ?>
     </tbody>
   </table>
  

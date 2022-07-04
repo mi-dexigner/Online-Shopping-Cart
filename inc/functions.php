@@ -146,3 +146,21 @@ $statement = $db->prepare($sql);
 $statement->execute([':params'=>$params]);
 return $statement->fetch()['option_value'];
 }
+function get_user_meta($id,$key){
+global $db;
+$sql = 'SELECT meta_value FROM usermeta WHERE user_id =:id AND meta_key =:key';
+$statement = $db->prepare($sql);
+$statement->execute([':id'=>$id,':key'=>$key]);
+// $statement->debugDumpParams();
+return $statement->fetch()['meta_value'];
+}
+
+
+function createSlug($slug){
+ $lettersNumbersSpacesHypens = '/[^\-\s\pN\pL]+/u';
+ $spacesDuplicateHypens = '/[\-\s]+/';
+ $slug = preg_replace($lettersNumbersSpacesHypens,'',mb_strtolower($slug));
+ $slug = preg_replace($spacesDuplicateHypens,'-',$slug);
+ return $slug;
+}
+
