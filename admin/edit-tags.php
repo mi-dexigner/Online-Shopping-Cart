@@ -67,8 +67,19 @@
       //die();
       
     }
+    
   }
-  
+
+  if(isset($_GET['action'])){
+    if($_GET['action'] === "delete"){
+$id = $_GET['tag_ID'];
+$sql = 'DELETE FROM terms WHERE term_id=:id';
+$statement = $db->prepare($sql);
+if($statement->execute([':id'=>$id])){
+    header("Location: ".ADMIN_URL);
+}
+    }
+  }
    ?>
         <div class="card">
 <div class="card-header page-header">
@@ -82,7 +93,7 @@
          <h2>Add New Category</h2>
          <form id="addtag" method="post" class="validate" enctype="multipart/form-data">
          <input type="hidden" name="action" value="add-tag">
-         <input type="hidden" name="taxonomy" value="category">
+         <input type="hidden" name="taxonomy" value="<?php echo (isset($_GET['taxonomy'])?$_GET['taxonomy']:'category'); ?>">
          <div class="form-field form-required term-name-wrap">
 	<label for="tag-name">Name</label>
 	<input name="tag_name" id="tag-name" type="text" value="" size="40" aria-required="true">
@@ -138,27 +149,42 @@
       </tr>
     </tfoot>
     <tbody>
-
+<?php
+if(isset($_GET['taxonomy'])){
+  $taxo = $_GET['taxonomy'];
+$sql = "SELECT * FROM terms WHERE taxonomy = :taxo";
+}
+$statement = $db->prepare($sql);
+$statement->execute([':taxo'=>$taxo]);
+$taxonomies = $statement->fetchAll(PDO::FETCH_OBJ);
+if($statement->rowCount() > 0):
+foreach($taxonomies as $term): 
+  // var_dump($term);
+?>
       <tr>
-        <td><input type="checkbox" name="users[]" id="user_1" class="administrator" value="1"></td>
+        <td><input type="checkbox" name="taxonomy[]" id="user_1" class="administrator" value="1"></td>
         <td class="title">
          <div>
-         <strong><a href="edit?tag_ID=123&action=edit">Uncategories</a></strong>
+         <strong><a href="edit?tag_ID=<?php echo $term->term_id; ?>&action=edit"><?php echo $term->name; ?></a></strong>
          <div class="row-actions">
-            <span class="edit"><a href="edit?tag_ID=123&action=edit">Edit</a> | </span>
-           <span class="view"> <a href="edit?tag_ID=123&action=view">View</a> | </span>
-            <span class="delete"><a href="edit?tag_ID=123&action=delete">Delete</a></span>
+            <span class="edit"><a href="edit-tags?tag_ID=<?php echo $term->term_id; ?>&taxonomy=<?php echo (isset($_GET['taxonomy'])?$_GET['taxonomy']:'category'); ?>&action=edit">Edit</a> | </span>
+           <!-- <span class="view"> <a href="edit?tag_ID=<?php echo $term->term_id; ?>&action=view">View</a> | </span> -->
+            <span class="delete"><a href="edit-tags?tag_ID=<?php echo $term->term_id; ?>&taxonomy=<?php echo (isset($_GET['taxonomy'])?$_GET['taxonomy']:'category'); ?>&action=delete">Delete</a></span>
           </div>
          </div>
         </div>
          
         </td>
         <td>—</td>
-        <td>uncategories</td>
+        <td><?php echo $term->slug; ?></td>
         <td>Uncategories</td>
       </tr>
-   
-    
+   <?php endforeach; else:?>
+   <tr>
+       
+        <td colspan="5">Not Found</td>
+      </tr>
+      <?php endif; ?>
     </tbody>
   </table>
      </div>

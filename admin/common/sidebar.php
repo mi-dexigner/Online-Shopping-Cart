@@ -43,7 +43,7 @@
  <ul class="submenu">
                     <li><a href="<?php echo ADMIN_URL; ?>edit?post_type=product"><span>All Products</span></a></li>
                     <li><a href="<?php echo ADMIN_URL; ?>post-new?post_type=product"><span>Add New</span></a></li>
-                    <li><a href="<?php echo ADMIN_URL; ?>edit-tags?taxonomy=post_cat"><span>Categories</span></a></li>
+                    <li><a href="<?php echo ADMIN_URL; ?>edit-tags?taxonomy=product_cat"><span>Categories</span></a></li>
                 </ul>
              </li>
              <li class="menu-dropdown">
