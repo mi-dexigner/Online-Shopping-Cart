@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 01, 2022 at 12:00 PM
+-- Generation Time: Jul 13, 2022 at 09:52 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -112,8 +112,16 @@ CREATE TABLE `terms` (
   `taxonomy` varchar(32) NOT NULL DEFAULT 'category',
   `description` longtext NOT NULL,
   `parent` int(11) NOT NULL DEFAULT 0,
-  `status` varchar(32) NOT NULL DEFAULT 'publish'
+  `status` varchar(32) NOT NULL DEFAULT 'publish',
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `terms`
+--
+
+INSERT INTO `terms` (`term_id`, `name`, `slug`, `taxonomy`, `description`, `parent`, `status`, `date`) VALUES
+(1, 'Uncategories', 'uncategories', 'category', '', 0, 'publish', '2022-07-05 05:57:08');
 
 -- --------------------------------------------------------
 
@@ -137,7 +145,12 @@ INSERT INTO `usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALUES
 (2, 1, 'last_name', 'Idrees'),
 (3, 1, 'description', ''),
 (4, 1, 'rich_editing', 'true'),
-(5, 1, 'capabilities', 'administrator');
+(5, 1, 'capabilities', 'administrator'),
+(6, 4, 'description', ''),
+(7, 4, 'first_name', 'Muhammad'),
+(8, 4, 'last_name', 'Ahmer'),
+(9, 4, 'website', 'ahmer.com'),
+(10, 4, 'capabilities', 'subscriber');
 
 -- --------------------------------------------------------
 
@@ -162,7 +175,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`ID`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_image`, `user_registered`, `user_status`, `display_name`) VALUES
-(1, 'admin', '5a33ddc8bdd733c3f1ba2b506522c135', '', 'admin@yopmail.com', '', '2022-06-02 10:40:28', 1, '');
+(1, 'admin', '5a33ddc8bdd733c3f1ba2b506522c135', '', 'admin@yopmail.com', '', '2022-06-02 10:40:28', 1, ''),
+(4, 'ahmer', 'e10adc3949ba59abbe56e057f20f883e', '', 'ahmer@gmail.com', '', '2022-07-02 09:22:34', 1, 'ahmer');
 
 --
 -- Indexes for dumped tables
@@ -243,19 +257,19 @@ ALTER TABLE `termmeta`
 -- AUTO_INCREMENT for table `terms`
 --
 ALTER TABLE `terms`
-  MODIFY `term_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `term_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `usermeta`
 --
 ALTER TABLE `usermeta`
-  MODIFY `umeta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `umeta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
