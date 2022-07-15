@@ -19,21 +19,9 @@
           </div>
           <div class="col-md-4 text-end">
             <ul class="list-inline">
-              <li class="list-inline-item">
-                <select class="form-select">
-                  <option value="english">English</option>
-                  <option value="spanish">Spanish</option>
-                  <option value="german">German</option>
-                </select>
-              </li>
-              <li class="list-inline-item">
-                <select class="form-select">
-                  <option value="USD">USD</option>
-                  <option value="POUND">POUND</option>
-                  <option value="EURO">EURO</option>
-                </select>
-              </li>
+              
               <li class="list-inline-item"><a href="<?php echo BASE_URL; ?>#">Login</a></li>
+              <li class="list-inline-item"><a href="<?php echo BASE_URL; ?>#">Register</a></li>
             </ul>
           </div>
         </div>
@@ -43,7 +31,7 @@
     <!-- // being offcanvasMenu -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasExampleLabel">
       <div class="offcanvas-header">
-        <h2 class="logo-name offcanvas-title">Venus Handicraft</h2>
+        <h2 class="logo-name offcanvas-title">Online Art Stationary</h2>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
@@ -66,21 +54,21 @@
               Products
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>product-list">Iron Handicrafts</a></li>
-              <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>product-list">Glass Handicrafts</a></li>
-              <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>product-list">Brass Handicrafts</a></li>
-              <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>product-list">Wood Handicrafts</a></li>
-              <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>product-list">Aluminium Handicrafts</a></li>
-              <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>product-list">Handicraft Decorative</a></li>
-              <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>product-list">Tables wares</a></li>
-              <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>product-list">Home Décor</a></li>
-              <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>product-list">Candle Accessories</a></li>
+            <?php
+          $sql = "SELECT * FROM terms WHERE taxonomy = 'product_cat'";
+        $statement = $db->prepare($sql);
+        $statement->execute();
+        $taxonomies = $statement->fetchAll(PDO::FETCH_OBJ);
+        if($statement->rowCount() > 0):
+        foreach($taxonomies as $term):
+          ?>
+              <li><a class="dropdown-item" href="<?php echo BASE_URL ;?>product-category/<?php echo $term->slug; ?>">
+              <?php echo $term->name; ?></a></li>
+              <?php endforeach;endif; ?> 
             </ul>
             
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo BASE_URL; ?>gallery">Gallery</a>
-          </li>
+         
           <li class="nav-item">
             <a class="nav-link" href="<?php echo BASE_URL; ?>contact-us">Contact Us</a>
           </li>
@@ -99,7 +87,7 @@
               <button class="btn d-block d-lg-none d-xl-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
                 <i class="fas fa-align-left"></i>
               </button>
-              <h2 class="logo-name  d-none d-lg-block d-xl-block">Venus Handicraft</h2>
+              <h2 class="logo-name  d-none d-lg-block d-xl-block">Online Art Stationary</h2>
             </div>
           </div>
            <div class="col-6 col-md-1 order-md-3 text-end">
@@ -189,21 +177,16 @@
                 <div class="col-auto d-none d-lg-block d-xl-block">
                   <select class="form-select">
                     <option value="">All Categories</option>
-                    <option value="Iron Handicrafts">Iron Handicrafts</option>
-                    <option value="Glass Handicrafts">Glass Handicrafts</option>
-                    <option value="Brass Handicrafts">Brass Handicrafts</option>
-                    <option value="Wood Handicrafts">Wood Handicrafts</option>
-                    <option value="Aluminium Handicrafts">
-                      Aluminium Handicrafts
-                    </option>
-                    <option value="Handicraft Decorative">
-                      Handicraft Decorative
-                    </option>
-                    <option value="Tables Wres">Tables Wares</option>
-                    <option value="Home Décor">Home Décor</option>
-                    <option value="Candle Accessories">
-                      Candle Accessories
-                    </option>
+                    <?php
+          $sql = "SELECT * FROM terms WHERE taxonomy = 'product_cat'";
+        $statement = $db->prepare($sql);
+        $statement->execute();
+        $taxonomies = $statement->fetchAll(PDO::FETCH_OBJ);
+        if($statement->rowCount() > 0):
+        foreach($taxonomies as $term):
+          ?>
+                    <option value="<?php echo $term->name; ?>"><?php echo $term->name; ?></option>
+                    <?php endforeach;endif; ?>  
                   </select>
                 </div>
                 <div class="col-8">
@@ -246,20 +229,19 @@
                 Products
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>product-list">Iron Handicrafts</a></li>
-                <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>product-list">Glass Handicrafts</a></li>
-                <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>product-list">Brass Handicrafts</a></li>
-                <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>product-list">Wood Handicrafts</a></li>
-                <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>product-list">Aluminium Handicrafts</a></li>
-                <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>product-list">Handicraft Decorative</a></li>
-                <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>product-list">Tables wares</a></li>
-                <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>product-list">Home Décor</a></li>
-                <li><a class="dropdown-item" href="<?php echo BASE_URL; ?>product-list">Candle Accessories</a></li>
+              <?php
+          $sql = "SELECT * FROM terms WHERE taxonomy = 'product_cat'";
+        $statement = $db->prepare($sql);
+        $statement->execute();
+        $taxonomies = $statement->fetchAll(PDO::FETCH_OBJ);
+        if($statement->rowCount() > 0):
+        foreach($taxonomies as $term):
+          ?>
+              <li><a class="dropdown-item" href="<?php echo BASE_URL ;?>product-category/<?php echo $term->slug; ?>">
+              <?php echo $term->name; ?></a></li>
+              <?php endforeach;endif; ?> 
               </ul>
               
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="<?php echo BASE_URL; ?>gallery">Gallery</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo BASE_URL; ?>contact-us">Contact Us</a>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2022 at 09:52 AM
+-- Generation Time: Jul 15, 2022 at 08:36 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.25
 
@@ -99,6 +99,15 @@ CREATE TABLE `termmeta` (
   `meta_value` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `termmeta`
+--
+
+INSERT INTO `termmeta` (`meta_id`, `term_id`, `meta_key`, `meta_value`) VALUES
+(1, 3, 'thumbnail', 'http://localhost/store/upload/258328443Fine-Arts-Pakistan_408x.progressive.webp'),
+(2, 4, 'thumbnail', 'http://localhost/store/upload/1834026252School-Bags-Pakistan_408x.progressive.webp'),
+(3, 5, 'thumbnail', 'http://localhost/store/upload/239458987Office-Supplies-Pakistan_408x.progressive.webp');
+
 -- --------------------------------------------------------
 
 --
@@ -121,7 +130,10 @@ CREATE TABLE `terms` (
 --
 
 INSERT INTO `terms` (`term_id`, `name`, `slug`, `taxonomy`, `description`, `parent`, `status`, `date`) VALUES
-(1, 'Uncategories', 'uncategories', 'category', '', 0, 'publish', '2022-07-05 05:57:08');
+(1, 'Uncategories', 'uncategories', 'category', '', 0, 'publish', '2022-07-05 05:57:08'),
+(3, 'Fine Art', 'fine-art', 'product_cat', '', 0, 'publish', '2022-07-14 21:00:14'),
+(4, 'School Supplies', 'school-supplies', 'product_cat', '', 0, 'publish', '2022-07-14 21:02:08'),
+(5, 'Office Supplies', 'office-supplies', 'product_cat', '', 0, 'publish', '2022-07-14 21:07:30');
 
 -- --------------------------------------------------------
 
@@ -251,13 +263,13 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `termmeta`
 --
 ALTER TABLE `termmeta`
-  MODIFY `meta_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `meta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `terms`
 --
 ALTER TABLE `terms`
-  MODIFY `term_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `term_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `usermeta`

@@ -177,7 +177,7 @@ foreach($taxonomies as $term):
         </td>
         <td>—</td>
         <td><?php echo $term->slug; ?></td>
-        <td>Uncategories</td>
+        <td><?php echo  date("d-m-Y", strtotime($term->date));?></td>
       </tr>
    <?php endforeach; else:?>
    <tr>

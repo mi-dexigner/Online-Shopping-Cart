@@ -5,7 +5,7 @@
             <div class="row">
             <div class="col-md-3 col-6  order-md-1">
               <div class="footer-logo">
-                <h3 class="logo-name">Venus Handicraft</h3>
+                <h3 class="logo-name">Online Art Stationary </h3>
               </div>
             </div>
               <div class="col-md-2 col-6  col-xs-3  order-md-3">
@@ -42,7 +42,7 @@
           <div class="widget col-md-3">
             <h5>Contact Us</h5>
             <address>Address: 116 Nhan Hoa,Nhan,Chin</address>
-            <p>Email:support@venushandicrafts.com</p>
+            <p>Email:support@onlineartstationary.com</p>
             <div class="py-3">
               <img src="assets/img/visa.jpg" alt="visa">
               <img src="assets/img/mastercard.jpg" alt="mastercard">
@@ -51,55 +51,35 @@
             </div>
           </div>
           <div class="widget col-md-3">
-            <h5>Popular Categories</h5>
+            <h5>Top Categories</h5>
             <ul class="list-unstyled">
-              <li>
-                <a href="product-list.html">Iron Handicrafts</a>
-              </li>
-              <li>
-                <a href="product-list.html">Glass Handicrafts</a>
-              </li>
-              <li>
-                <a href="product-list.html">Brass Handicrafts</a>
-              </li>
-              <li>
-                <a href="product-list.html">Wood Handicrafts</a>
-              </li>
-              <li>
-                <a href="product-list.html">Aluminium Handicrafts</a>
-              </li>
-              <li>
-                <a href="product-list.html">Handicraft Decorative</a>
-              </li>
-              <li>
-                <a href="product-list.html">Tables Wares</a>
-              </li>
-              <li>
-                <a href="product-list.html">Home Décor</a>
-              </li>
-              <li>
-                <a href="product-list.html"> Candle Accessories</a>
-              </li>
+            <?php
+          $sql = "SELECT * FROM terms WHERE taxonomy = 'product_cat'";
+        $statement = $db->prepare($sql);
+        $statement->execute();
+        $taxonomies = $statement->fetchAll(PDO::FETCH_OBJ);
+        if($statement->rowCount() > 0):
+        foreach($taxonomies as $term):
+          ?>
+              <li><a  href="<?php echo BASE_URL ;?>product-category/<?php echo $term->slug; ?>">
+              <?php echo $term->name; ?></a></li>
+              <?php endforeach;endif; ?> 
+             
             </ul>
           </div>
           <div class="widget col-md-3">
             <h5>Quick Links</h5>
             <ul class="list-unstyled">
               <li>
-                <a href="about-us.html">About</a>
+                <a href="<?php echo BASE_URL ;?>about-us">About</a>
               </li>
               <li>
-                <a href="faqs.html">F.A.Q</a>
+                <a href="<?php echo BASE_URL ;?>faqs">F.A.Q</a>
               </li>
               <li>
-                <a href="gallery.html">Gallery</a>
+                <a href="<?php echo BASE_URL ;?>contact-us">Contact Us</a>
               </li>
-              <li>
-                <a href="contact-us.html">Contact Us</a>
-              </li>
-              <li>
-                <a href="sitemap.html">Sitemap</a>
-              </li>
+              
             </ul>
           </div>
           <div class="widget col-md-3">

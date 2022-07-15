@@ -154,6 +154,14 @@ $statement->execute([':id'=>$id,':key'=>$key]);
 // $statement->debugDumpParams();
 return $statement->fetch()['meta_value'];
 }
+function get_term_meta($id,$key){
+global $db;
+$sql = 'SELECT meta_value FROM termmeta WHERE term_id =:id AND meta_key =:key';
+$statement = $db->prepare($sql);
+$statement->execute([':id'=>$id,':key'=>$key]);
+// $statement->debugDumpParams();
+return $statement->fetch()['meta_value'];
+}
 
 
 function createSlug($slug){

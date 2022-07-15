@@ -193,14 +193,26 @@ header .container .row {
 }
 /* // end navigation */
 /* // being slider-banner */
+#carouselMain{
+  height: 450px;
+  overflow: hidden;
+}
+#carouselMain .carousel-inner .carousel-item,
+#carouselMain .carousel-inner{
+  height: 450px;
+}
+#carouselMain .carousel-inner .carousel-item{
+  object-fit: cover;
+  object-position: center;
+}
 .carousel-item:before {
-  content: "";
+  /* content: "";
   background-color: #00000099;
   position: absolute;
   top: 0px;
   bottom: 0px;
   right: 0px;
-  left: 0px;
+  left: 0px; */
 }
 /* // end slider-banner */
 /* // being banner */
@@ -1087,7 +1099,7 @@ ul.admin-post li p {
 /* Being Mobile Responisve */
 @media (max-width: 1400px) {
   .logo h2 {
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
   .banner {
     min-height: 469px;

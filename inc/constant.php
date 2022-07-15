@@ -9,7 +9,7 @@ define('ADMIN_URL', BASE_URL.'admin/');
 define('DIR_UPLOAD', 'upload/');
 define("MAX_IMAGE_SIZE", 20480); //In KB
 // image type allowed
-$IMAGE_ALLOWED_TYPES=array("jpg","JPG", "jpeg","JPEG", "gif", "png","PNG","psd","ai","xls","xlsx","csv","doc","docx","ppt","pptx","pdf","zip","rar","txt","html","css","js");
+$IMAGE_ALLOWED_TYPES=array("jpg","JPG", "jpeg","JPEG", "gif", "png","PNG","psd","ai","xls","xlsx","csv","doc","docx","ppt","pptx","pdf","zip","rar","txt","html","css","js","webp");
 
 
 
